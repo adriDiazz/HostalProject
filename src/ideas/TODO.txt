@@ -1,0 +1,27 @@
+Users:
+	name
+	password
+Rooms:
+	number
+	client
+	type
+	isCleaned
+	isFree
+Client:
+	name
+	id
+	dateCheckin
+	dateCheckout
+	
+Funcionalidades:
+	Ver habitaciones
+	Ver Clientes
+	Login
+	Dinero Generado
+	Occupancy
+	Client info(list view)
+	Calendar
+Server side:
+	Send to mongo
+	Problema si se escanean mas de un DNI
+	
