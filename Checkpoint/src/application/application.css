@@ -1,0 +1,7 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+.materialDesign-white .arc {
+	-fx-stroke: #8e0000;
+	-fx-stroke-width: 3;
+	-fx-focus-color: #8e0000;
+}

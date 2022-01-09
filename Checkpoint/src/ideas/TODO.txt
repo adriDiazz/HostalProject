@@ -1,0 +1,107 @@
+Users:
+	name
+	password
+Rooms:
+	number
+	client
+	type
+	isCleaned
+	isFree
+Client:
+	name
+	id
+	repetidor
+	entradas
+	dateCheckin
+	dateCheckout
+	
+Funcionalidades:
+	Dinero Generado
+	Occupancy
+	Repetidor function
+	Añadir clientes a una habitacion
+	Calendar
+	Empresa
+	Precio
+	Clase date para comparaciones
+Server side:
+	Send to mongo
+	Problema si se escanean mas de un DNI
+	
+	
+	try {
+				checkOut = new SimpleDateFormat("yyyy-MM-dd").parse(mongo.getCheckOut(cliente));
+				System.out.println(checkOut);
+				if(checkOut.before(dat)) {
+					//clients.remove(i);
+					System.out.println("lg");
+				}
+				
+
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	
+	
+	for (String cliente:clients) {	
+			try {
+				checkIn = new SimpleDateFormat("yyyy-MM-dd").parse(mongo.getCheckIn(cliente));
+				checkOut = new SimpleDateFormat("yyyy-MM-dd").parse(mongo.getCheckOut(cliente));
+				
+
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+
+			if(dat.before(checkOut)) {
+				clients.remove(cliente);
+			}
+		}
+			
+		for (String cliente:clients) {	
+			try {
+				Label lbl = new Label(cliente);
+				lbl.setGraphic(new ImageView(new Image(new FileInputStream("src/img/icon.png"))));
+				lbl.setGraphicTextGap(30);
+				
+				listView.getItems().add(lbl);
+				
+				
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
+		}
+	
+		listView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Label>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Label> observable, Label oldValue, Label newValue) {
+				System.out.println(listView.getSelectionModel().getSelectedItem().getText().toString());
+				currentClient = listView.getSelectionModel().getSelectedItem().getText().toString();
+				 try {
+						FXMLLoader loader =  new FXMLLoader(getClass().getResource("/view/principal/ProfileView.fxml"));
+						ProfileController controller =  new ProfileController();
+						controller.setMainWindow(mainWindow);
+						controller.setCurrentClient(currentClient);
+						loader.setController(controller);
+						Parent node;
+						node = loader.load();
+						Scene scene = new Scene(node, mainWindow.getScene().getWidth(), mainWindow.getScene().getHeight());
+						mainWindow.setScene(scene);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				
+				
+			}});
+		getOcupancy();
+		
+	}
+	
